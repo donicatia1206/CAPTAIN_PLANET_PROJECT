@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto 5º Elemento — Sintetizador Biométrico</title>
+    <style>
+        body { background-color: #0b0e14; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { border: 2px solid #f3ba2f; border-radius: 15px; padding: 25px; width: 350px; background-color: #121721; text-align: center; box-shadow: 0 0 15px rgba(243, 186, 47, 0.2); }
+        h1 { color: #f3ba2f; font-size: 20px; margin-bottom: 5px; }
+        p.sub { font-size: 11px; color: #aaa; letter-spacing: 1px; margin-top: 0; }
+        .display-box { background-color: #080a0f; border: 1px solid #f3ba2f; border-radius: 8px; padding: 15px; min-height: 50px; display: flex; justify-content: center; align-items: center; margin: 15px 0; color: #f3ba2f; font-weight: bold; font-size: 14px; }
+        .inputs { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
+        .input-group { text-align: left; flex: 1; }
+        label { font-size: 11px; color: #aaa; display: block; margin-bottom: 4px; }
+        input { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #333; background-color: #080a0f; color: #fff; box-sizing: border-box; }
+        button.btn-analisar { width: 100%; padding: 12px; background-color: #f3ba2f; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: #000; font-size: 14px; }
+        button.btn-analisar:hover { background-color: #e0a820; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>PROJETO 5º ELEMENTO</h1>
+        <p class="sub">SINTETIZADOR BIOMÉTRICO DE LÁGRIMAS</p>
+        
+        <div class="display-box" id="resultado">Informe a biometria para a IA analisar...</div>
+        
+        <div class="inputs">
+            <div class="input-group">
+                <label>Batimentos (BPM):</label>
+                <input type="number" id="bpm" value="70">
+            </div>
+            <div class="input-group">
+                <label>Estresse (0-100):</label>
+                <input type="number" id="estresse" value="20">
+            </div>
+        </div>
+        
+        <button class="btn-analisar" onclick="analisarBiometria()">ANALISAR BIOMETRIA COM IA</button>
+    </div>
+
+    <script>
+        async function analisarBiometria() {
+            const bpm = document.getElementById('bpm').value;
+            const estresse = document.getElementById('estresse').value;
+            const display = document.getElementById('resultado');
+
+            display.innerText = "Analisando com IA...";
+
+            try {
+                const response = await fetch('http://localhost:5000/analisar', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ bpm: parseFloat(bpm), estresse: parseFloat(estresse) })
+                });
+
+                const data = await response.json();
+                display.innerText = `[ESTADO: ${data.estado}] — ${data.mensagem}`;
+            } catch (error) {
+                display.innerText = "Erro ao conectar com o servidor Python local!";
+            }
+        }
+    </script>
+</body>
+</html>
