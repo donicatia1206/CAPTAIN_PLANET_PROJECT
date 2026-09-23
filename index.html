@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,8 @@
         .card { border: 2px solid #f3ba2f; border-radius: 15px; padding: 25px; width: 350px; background-color: #121721; text-align: center; box-shadow: 0 0 15px rgba(243, 186, 47, 0.2); }
         h1 { color: #f3ba2f; font-size: 20px; margin-bottom: 5px; }
         p.sub { font-size: 11px; color: #aaa; letter-spacing: 1px; margin-top: 0; }
-        .display-box { background-color: #080a0f; border: 1px solid #f3ba2f; border-radius: 8px; padding: 15px; min-height: 50px; display: flex; justify-content: center; align-items: center; margin: 15px 0; color: #f3ba2f; font-weight: bold; font-size: 14px; }
+        .display-box { background-color: #080a0f; border: 1px solid #f3ba2f; border-radius: 8px; padding: 15px; min-height: 50px; display: flex; justify-content: center; align-items: center; margin: 15px 0; color: #f3ba2f; font-weight: bold; font-size: 14px; flex-direction: column; gap: 10px; }
+        .display-img { width: 100%; border-radius: 8px; display: none; margin-top: 10px; border: 1px solid #f3ba2f; }
         .inputs { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
         .input-group { text-align: left; flex: 1; }
         label { font-size: 11px; color: #aaa; display: block; margin-bottom: 4px; }
@@ -23,7 +24,10 @@
         <h1>PROJETO 5º ELEMENTO</h1>
         <p class="sub">SINTETIZADOR BIOMÉTRICO DE LÁGRIMAS</p>
         
-        <div class="display-box" id="resultado">Informe a biometria para a IA analisar...</div>
+        <div class="display-box" id="resultado">
+            <span id="texto-resultado">Informe a biometria para a IA analisar...</span>
+            <img id="img-emocao" class="display-img" src="" alt="Estado Emocional">
+        </div>
         
         <div class="inputs">
             <div class="input-group">
@@ -40,12 +44,23 @@
     </div>
 
     <script>
+        const imagens = {
+            "GRATIDAO": "assets/gratidao.png",
+            "PAZ": "assets/paz.png",
+            "ALEGRIA": "assets/alegria.png",
+            "TRISTEZA": "assets/tristeza.png",
+            "DOR_DA_ALMA": "assets/dor_da_alma.png",
+            "RAIVA": "assets/raiva.png"
+        };
+
         async function analisarBiometria() {
             const bpm = document.getElementById('bpm').value;
             const estresse = document.getElementById('estresse').value;
-            const display = document.getElementById('resultado');
+            const textoDisplay = document.getElementById('texto-resultado');
+            const imgDisplay = document.getElementById('img-emocao');
 
-            display.innerText = "Analisando com IA...";
+            textoDisplay.innerText = "Analisando com IA...";
+            imgDisplay.style.display = "none";
 
             try {
                 const response = await fetch('http://localhost:5000/analisar', {
@@ -55,9 +70,14 @@
                 });
 
                 const data = await response.json();
-                display.innerText = `[ESTADO: ${data.estado}] — ${data.mensagem}`;
+                textoDisplay.innerText = `[ESTADO: ${data.estado}]\n${data.mensagem}`;
+                
+                if (imagens[data.estado]) {
+                    imgDisplay.src = imagens[data.estado];
+                    imgDisplay.style.display = "block";
+                }
             } catch (error) {
-                display.innerText = "Erro ao conectar com o servidor Python local!";
+                textoDisplay.innerText = "Erro ao conectar com o servidor Python local!";
             }
         }
     </script>
