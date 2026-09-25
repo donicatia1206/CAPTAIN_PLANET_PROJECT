@@ -5,54 +5,129 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto 5º Elemento — Sintetizador Biométrico</title>
     <style>
-        body { background-color: #0b0e14; color: #fff; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; }
-        .card { border: 2px solid #f3ba2f; border-radius: 15px; padding: 25px; width: 350px; background-color: #121721; text-align: center; box-shadow: 0 0 15px rgba(243, 186, 47, 0.2); margin-top: 20px; }
-        h1 { color: #f3ba2f; font-size: 20px; margin-bottom: 5px; }
-        p.sub { font-size: 11px; color: #aaa; letter-spacing: 1px; margin-top: 0; }
-        .display-box { background-color: #080a0f; border: 1px solid #f3ba2f; border-radius: 8px; padding: 15px; min-height: 50px; display: flex; justify-content: center; align-items: center; margin: 15px 0; color: #f3ba2f; font-weight: bold; font-size: 14px; flex-direction: column; gap: 10px; }
-        .display-img { width: 100%; border-radius: 8px; display: none; margin-top: 10px; border: 1px solid #f3ba2f; }
-        .inputs { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
-        .input-group { text-align: left; flex: 1; }
-        label { font-size: 11px; color: #aaa; display: block; margin-bottom: 4px; }
-        input { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #333; background-color: #080a0f; color: #fff; box-sizing: border-box; }
-        button.btn-analisar { width: 100%; padding: 12px; background-color: #f3ba2f; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: #000; font-size: 14px; }
-        button.btn-analisar:hover { background-color: #e0a820; }
-        
-        /* Estilo do Menu */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body { 
+            background-color: #0b0e14; 
+            color: #fff; 
+            font-family: system-ui, -apple-system, sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding-bottom: 30px;
+        }
+
+        /* Menu de Navegação Universal do Ecossistema */
         .nav-ecossistema {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            align-items: center;
+            gap: 10px;
             background-color: #111111;
-            padding: 10px;
+            padding: 12px 10px;
             width: 100%;
             border-bottom: 1px solid #333333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             flex-wrap: wrap;
+            margin-bottom: 25px;
         }
+
         .nav-ecossistema a {
             color: #00bcff;
             text-decoration: none;
             font-weight: bold;
             font-size: 13px;
-            padding: 6px 12px;
+            padding: 8px 14px;
             border: 1px solid #00bcff;
             border-radius: 6px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            white-space: nowrap;
         }
+
         .nav-ecossistema a:hover, .nav-ecossistema a.ativo {
             background-color: #00bcff;
             color: #111111;
+            box-shadow: 0 0 8px rgba(0, 188, 255, 0.4);
         }
+
+        /* Cartão Principal de Análise */
+        .card { 
+            border: 2px solid #f3ba2f; 
+            border-radius: 15px; 
+            padding: 25px; 
+            width: 100%;
+            max-width: 380px; 
+            background-color: #121721; 
+            text-align: center; 
+            box-shadow: 0 0 20px rgba(243, 186, 47, 0.25); 
+        }
+
+        h1 { color: #f3ba2f; font-size: 20px; margin-bottom: 5px; letter-spacing: 1px; }
+        p.sub { font-size: 11px; color: #aaa; letter-spacing: 1px; margin-bottom: 15px; }
+
+        .display-box { 
+            background-color: #080a0f; 
+            border: 1px solid #f3ba2f; 
+            border-radius: 8px; 
+            padding: 15px; 
+            min-height: 60px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 15px 0; 
+            color: #f3ba2f; 
+            font-weight: bold; 
+            font-size: 14px; 
+            flex-direction: column; 
+            gap: 10px; 
+        }
+
+        .display-img { width: 100%; border-radius: 8px; display: none; margin-top: 10px; border: 1px solid #f3ba2f; }
+        
+        .inputs { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
+        .input-group { text-align: left; flex: 1; }
+        
+        label { font-size: 11px; color: #aaa; display: block; margin-bottom: 4px; }
+        input { 
+            width: 100%; 
+            padding: 10px; 
+            border-radius: 5px; 
+            border: 1px solid #333; 
+            background-color: #080a0f; 
+            color: #fff; 
+            font-size: 14px;
+        }
+
+        button.btn-analisar { 
+            width: 100%; 
+            padding: 14px; 
+            background-color: #f3ba2f; 
+            border: none; 
+            border-radius: 8px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            color: #000; 
+            font-size: 14px; 
+            transition: background 0.3s ease;
+        }
+
+        button.btn-analisar:hover { background-color: #e0a820; }
     </style>
 </head>
 <body>
 
- <!-- Menu Superior de Navegação -->
-<nav class="nav-ecossistema">
-    <a href="https://donicatia1206.github.io/donicatia1206/">🧮 Balanço Energético</a>
-    <a href="https://donicatia1206.github.io/CAPTAIN_PLANET_PROJECT/" class="ativo">🤖 Sintetizador IA</a>
-    <a href="https://donicatia1206.github.io/lagrimas_emocionais/">🎨 Portais da Alma</a>
-</nav>
+    <!-- Menu Superior Conectado do Ecossistema -->
+    <nav class="nav-ecossistema">
+        <a href="https://donicatia1206.github.io/donicatia1206/">🧮 Balanço Energético</a>
+        <a href="https://donicatia1206.github.io/CAPTAIN_PLANET_PROJECT/" class="ativo">🤖 Sintetizador IA</a>
+        <a href="https://donicatia1206.github.io/lagrimas_emocionais/">🎨 Portais da Alma</a>
+    </nav>
+
     <div class="card">
         <h1>PROJETO 5º ELEMENTO</h1>
         <p class="sub">SINTETIZADOR BIOMÉTRICO DE LÁGRIMAS</p>
@@ -110,7 +185,7 @@
                     imgDisplay.style.display = "block";
                 }
             } catch (error) {
-                textoDisplay.innerText = "Erro ao conectar com o servidor Python!";
+                textoDisplay.innerText = "Erro ao conectar com o servidor Python na nuvem!";
             }
         }
     </script>
