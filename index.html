@@ -19,20 +19,20 @@
             flex-direction: column; 
             align-items: center; 
             min-height: 100vh; 
-            padding-bottom: 30px;
+            padding-bottom: 40px;
         }
 
-        /* Menu de Navegação Universal do Ecossistema */
+        /* Menu Superior de Navegação do Ecossistema */
         .nav-ecossistema {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background-color: #111111;
-            padding: 12px 10px;
+            padding: 12px 15px;
             width: 100%;
             border-bottom: 1px solid #333333;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
             flex-wrap: wrap;
             margin-bottom: 25px;
         }
@@ -42,7 +42,7 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 13px;
-            padding: 8px 14px;
+            padding: 8px 16px;
             border: 1px solid #00bcff;
             border-radius: 6px;
             transition: all 0.3s ease;
@@ -52,28 +52,40 @@
         .nav-ecossistema a:hover, .nav-ecossistema a.ativo {
             background-color: #00bcff;
             color: #111111;
-            box-shadow: 0 0 8px rgba(0, 188, 255, 0.4);
+            box-shadow: 0 0 10px rgba(0, 188, 255, 0.5);
         }
 
-        /* Cartão Principal de Análise */
+        /* Container do Cartão Dimensionado */
         .card { 
             border: 2px solid #f3ba2f; 
-            border-radius: 15px; 
+            border-radius: 16px; 
             padding: 25px; 
-            width: 100%;
-            max-width: 380px; 
+            width: 92%;
+            max-width: 720px; 
             background-color: #121721; 
             text-align: center; 
-            box-shadow: 0 0 20px rgba(243, 186, 47, 0.25); 
+            box-shadow: 0 0 25px rgba(243, 186, 47, 0.3); 
         }
 
-        h1 { color: #f3ba2f; font-size: 20px; margin-bottom: 5px; letter-spacing: 1px; }
-        p.sub { font-size: 11px; color: #aaa; letter-spacing: 1px; margin-bottom: 15px; }
+        h1 { 
+            color: #f3ba2f; 
+            font-size: 22px; 
+            margin-bottom: 4px; 
+            letter-spacing: 1.5px; 
+        }
 
+        p.sub { 
+            font-size: 12px; 
+            color: #aaa; 
+            letter-spacing: 1.2px; 
+            margin-bottom: 20px; 
+        }
+
+        /* Caixa de Exibição do Resultado e Imagem */
         .display-box { 
             background-color: #080a0f; 
             border: 1px solid #f3ba2f; 
-            border-radius: 8px; 
+            border-radius: 10px; 
             padding: 15px; 
             min-height: 60px; 
             display: flex; 
@@ -82,41 +94,62 @@
             margin: 15px 0; 
             color: #f3ba2f; 
             font-weight: bold; 
-            font-size: 14px; 
+            font-size: 15px; 
             flex-direction: column; 
-            gap: 10px; 
+            gap: 12px; 
         }
 
-        .display-img { width: 100%; border-radius: 8px; display: none; margin-top: 10px; border: 1px solid #f3ba2f; }
-        
-        .inputs { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 15px; }
+        .display-img { 
+            width: 100%; 
+            max-width: 680px; 
+            border-radius: 10px; 
+            display: none; 
+            margin-top: 10px; 
+            border: 1px solid #f3ba2f; 
+            box-shadow: 0 0 15px rgba(243, 186, 47, 0.2);
+        }
+
+        /* Formulários de Entrada */
+        .inputs { 
+            display: flex; 
+            justify-content: space-between; 
+            gap: 15px; 
+            margin-top: 20px;
+            margin-bottom: 20px; 
+        }
+
         .input-group { text-align: left; flex: 1; }
-        
-        label { font-size: 11px; color: #aaa; display: block; margin-bottom: 4px; }
+
+        label { font-size: 12px; color: #aaa; display: block; margin-bottom: 6px; }
+
         input { 
             width: 100%; 
-            padding: 10px; 
-            border-radius: 5px; 
+            padding: 12px; 
+            border-radius: 6px; 
             border: 1px solid #333; 
             background-color: #080a0f; 
             color: #fff; 
-            font-size: 14px;
+            font-size: 15px;
         }
 
         button.btn-analisar { 
             width: 100%; 
-            padding: 14px; 
+            padding: 15px; 
             background-color: #f3ba2f; 
             border: none; 
             border-radius: 8px; 
             font-weight: bold; 
             cursor: pointer; 
             color: #000; 
-            font-size: 14px; 
-            transition: background 0.3s ease;
+            font-size: 15px; 
+            letter-spacing: 0.8px;
+            transition: all 0.3s ease;
         }
 
-        button.btn-analisar:hover { background-color: #e0a820; }
+        button.btn-analisar:hover { 
+            background-color: #e0a820; 
+            box-shadow: 0 0 12px rgba(243, 186, 47, 0.5);
+        }
     </style>
 </head>
 <body>
